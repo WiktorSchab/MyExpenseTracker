@@ -1,7 +1,55 @@
 import "./App.css";
 
 function App() {
-    return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  return (
+    <div className="text-whitept-2 relative h-auto min-h-[850px] w-[900px] bg-blue-500 px-5">
+      <h1 className="mb-2 mt-5">Montly expenses</h1>
+      <hr />
+
+      {/* Sum of montly expenses and chart */}
+      <div className="flex flex-col items-center">
+        <h3 className="mb-2 mt-2">Balance: 3000$</h3>
+        <div className="h-[300px] w-[300px] bg-blue-200"></div>
+      </div>
+
+      {/* Buttons for filtering etc */}
+      <div className="mt-3 flex justify-end gap-3">
+        {/* Slider for money range? (idk how to name it)  */}
+        <div>there will be slider</div>
+
+        {/* Button that shows sorting options by date/amount */}
+        <button>sort</button>
+
+        {/*Show only expenses/earnings (toogle) */}
+        <button>Show expenses </button>
+      </div>
+
+      {/* List of expenses and earnings */}
+      <div className="flex justify-center">
+        <ul className="mt-2 flex h-[350px] w-[85%] flex-col gap-2 overflow-auto bg-blue-200 p-2">
+          <li className="flex flex-row bg-blue-600 p-2 text-left">
+            <div className="flex w-[500px] flex-row items-center">
+              <p>+300$ Gift from family</p>
+              <div className="ml-5">
+                <p>Type: Expense</p>
+                <p>Category: Online-Shoping</p>
+              </div>
+            </div>
+
+            <div className="ml-auto">
+              <button>Edit</button>
+              <button>Delete</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      {/* Button to add new expenses */}
+      <button className="absolute bottom-0 right-0 m-2 flex h-12 w-12 items-center justify-center rounded-full">
+        Add
+      </button>
+    </div>
+  );
 }
 
 export default App;
