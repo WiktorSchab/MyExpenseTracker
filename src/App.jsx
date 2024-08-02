@@ -1,4 +1,6 @@
 import "./App.css";
+import ExpenseItem from "./Components/ExpenseItem";
+import { transactions } from "./Data/transactions";
 
 function App() {
   return (
@@ -27,20 +29,16 @@ function App() {
       {/* List of expenses and earnings */}
       <div className="flex justify-center">
         <ul className="mt-2 flex h-[350px] w-[85%] flex-col gap-2 overflow-auto bg-blue-200 p-2">
-          <li className="flex flex-row bg-blue-600 p-2 text-left">
-            <div className="flex w-[500px] flex-row items-center">
-              <p>+300$ Gift from family</p>
-              <div className="ml-5">
-                <p>Type: Expense</p>
-                <p>Category: Online-Shoping</p>
-              </div>
-            </div>
-
-            <div className="ml-auto">
-              <button>Edit</button>
-              <button>Delete</button>
-            </div>
-          </li>
+          {transactions.map((transaction, index) => (
+            <ExpenseItem
+              key={index}
+              valueType={transaction.valueType}
+              value={transaction.value}
+              description={transaction.description}
+              type={transaction.type}
+              category={transaction.category}
+            />
+          ))}
         </ul>
       </div>
 
