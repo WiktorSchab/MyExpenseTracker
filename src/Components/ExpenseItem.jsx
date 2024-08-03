@@ -25,13 +25,12 @@ ExpenseItem.propTypes = {
   valueType: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
   description: PropTypes.string,
-  type: PropTypes.string,
+  type: PropTypes.string.isRequired,
   category: PropTypes.string,
 };
 
 ExpenseItem.defaultProps = {
   description: "No description provided",
-  type: "Unknown",
   category: "Uncategorized",
 };
 
