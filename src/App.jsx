@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="text-whitept-2 relative h-auto min-h-[850px] w-[900px] bg-blue-500 px-5">
-      <h1 className="mb-2 mt-5">Montly expenses</h1>
+      <h1 className="mb-2 mt-5">Monthly expenses</h1>
       <hr />
 
       {/* Sum of montly expenses and chart */}
