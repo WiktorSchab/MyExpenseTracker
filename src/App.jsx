@@ -1,8 +1,26 @@
+import { useState } from "react";
 import "./App.css";
 import ExpenseItem from "./Components/ExpenseItem";
 import { transactions } from "./Data/transactions";
+import AddRecordForm from "./Components/AddRecordForm";
 
 function App() {
+  const [isFormDisplayed, setIsFormDisplayed] = useState(false);
+
+  const handleAddClick = () => setIsFormDisplayed(true);
+  const handleCloseForm = () => setIsFormDisplayed(false);
+
+  const renderAddButton = () => {
+    return (
+      <button
+        onClick={handleAddClick}
+        className="small-round-button absolute bottom-0 right-0 m-2"
+      >
+        Add
+      </button>
+    );
+  };
+
   return (
     <div className="text-whitept-2 relative h-auto min-h-[850px] w-[900px] bg-blue-500 px-5">
       <h1 className="mb-2 mt-5">Montly expenses</h1>
@@ -43,9 +61,11 @@ function App() {
       </div>
 
       {/* Button to add new expenses */}
-      <button className="absolute bottom-0 right-0 m-2 flex h-12 w-12 items-center justify-center rounded-full">
-        Add
-      </button>
+      {isFormDisplayed ? (
+        <AddRecordForm onClose={handleCloseForm} />
+      ) : (
+        renderAddButton()
+      )}
     </div>
   );
 }
