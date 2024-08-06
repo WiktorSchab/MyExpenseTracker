@@ -1,10 +1,11 @@
 import { useState } from "react";
 import "./App.css";
 import ExpenseItem from "./Components/ExpenseItem";
-import { transactions } from "./Data/transactions";
+import { transactions as initialTransactions } from "./Data/transactions";
 import AddRecordForm from "./Components/AddRecordForm";
 
 function App() {
+  const [transactions, setTransactions] = useState(initialTransactions);
   const [isFormDisplayed, setIsFormDisplayed] = useState(false);
 
   const handleAddClick = () => setIsFormDisplayed(true);
@@ -19,6 +20,11 @@ function App() {
         Add
       </button>
     );
+  };
+
+  const handleAddRecord = (newRecord) => {
+    setTransactions([...transactions, newRecord]);
+    setIsFormDisplayed(false);
   };
 
   return (
@@ -62,7 +68,10 @@ function App() {
 
       {/* Button to add new expenses */}
       {isFormDisplayed ? (
-        <AddRecordForm onClose={handleCloseForm} />
+        <AddRecordForm
+          onClose={handleCloseForm}
+          onAddRecord={handleAddRecord}
+        />
       ) : (
         renderAddButton()
       )}
