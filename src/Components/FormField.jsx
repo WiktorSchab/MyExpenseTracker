@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 function FormField({ id, label, placeholder, maxLength }) {
   return (
-    <div className="row col w-[80%] justify-start">
+    <div className="row col justify-start">
       <label
         htmlFor={id}
         className="mb-2 ml-1 mt-2 block text-left text-sm font-medium"
