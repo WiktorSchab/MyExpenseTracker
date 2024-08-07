@@ -10,6 +10,8 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
 
+  const [amountError, setAmountError] = useState("");
+
   const optionsToShow = isExpense ? expenseCategories : incomeCategories;
 
   useEffect(() => {
@@ -43,6 +45,21 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
     setCategory("");
   };
 
+  const amountValidation = (e) => {
+    const value = e.target.value;
+    const floatValue = parseFloat(value);
+
+    setAmount(value);
+
+    if (isNaN(floatValue) || floatValue.toString() !== value) {
+      setAmountError("Error! You have to provide a number.");
+    } else if (floatValue <= 0) {
+      setAmountError("Error! You have to provide a positive number.");
+    } else {
+      setAmountError("");
+    }
+  };
+
   return (
     <div className="slide-in absolute bottom-0 left-0 h-[40%] w-[100%] bg-cyan-700">
       <div className="w-[100%]bg-blue-500 relative h-[100%]">
@@ -60,8 +77,10 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
             placeholder="95"
             maxLength={16}
             value={amount.toString()}
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={amountValidation}
+            validationError={amountError}
           />
+
           <FormField
             id="description-field"
             label="Description"
