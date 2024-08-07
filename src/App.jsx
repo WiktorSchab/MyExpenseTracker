@@ -7,8 +7,12 @@ import AddRecordForm from "./Components/AddRecordForm";
 function App() {
   const [transactions, setTransactions] = useState(initialTransactions);
   const [isFormDisplayed, setIsFormDisplayed] = useState(false);
+  const [editRecord, setEditRecord] = useState(null);
 
-  const handleAddClick = () => setIsFormDisplayed(true);
+  const handleAddClick = () => {
+    setIsFormDisplayed(true);
+    setEditRecord(null);
+  };
   const handleCloseForm = () => setIsFormDisplayed(false);
 
   const renderAddButton = () => {
@@ -24,6 +28,31 @@ function App() {
 
   const handleAddRecord = (newRecord) => {
     setTransactions([...transactions, newRecord]);
+    setIsFormDisplayed(false);
+  };
+
+  const handleEditRecord = (recordId) => {
+    // Get the single record based on the recordId
+    const filteredTransaction = transactions.filter(
+      (_, index) => index === recordId,
+    );
+
+    // Add the id to the record
+    const transaction = {
+      ...filteredTransaction,
+      id: recordId,
+    };
+
+    setEditRecord(transaction);
+    setIsFormDisplayed(true);
+  };
+
+  const finalizeEditRecord = (editedRecord, recordId) => {
+    // Update the transaction at the specified index with the edited record
+    const updatedTransactions = [...transactions];
+    updatedTransactions[recordId] = editedRecord;
+
+    setTransactions(updatedTransactions);
     setIsFormDisplayed(false);
   };
 
@@ -56,11 +85,13 @@ function App() {
           {transactions.map((transaction, index) => (
             <ExpenseItem
               key={index}
+              id={index}
               valueType={transaction.valueType}
               value={transaction.value}
               description={transaction.description}
               type={transaction.type}
               category={transaction.category}
+              onEditFunc={handleEditRecord}
             />
           ))}
         </ul>
@@ -71,6 +102,8 @@ function App() {
         <AddRecordForm
           onClose={handleCloseForm}
           onAddRecord={handleAddRecord}
+          onEditRecord={finalizeEditRecord}
+          recordToEdit={editRecord}
         />
       ) : (
         renderAddButton()

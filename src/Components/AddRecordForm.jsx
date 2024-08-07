@@ -1,16 +1,26 @@
 import PropTypes from "prop-types";
 import FormField from "./FormField";
 import RadioButton from "./RadioButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { expenseCategories, incomeCategories } from "../Data/categories";
 
-function AddRecordForm({ onClose, onAddRecord, editRecord }) {
+function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
   const [isExpense, setIsExpense] = useState(true);
   const [amount, setAmount] = useState(0);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
 
   const optionsToShow = isExpense ? expenseCategories : incomeCategories;
+
+  useEffect(() => {
+    if (recordToEdit) {
+      const record = recordToEdit[0];
+      setIsExpense(record.valueType === "-");
+      setAmount(record.value);
+      setDescription(record.description);
+      setCategory(record.category);
+    }
+  }, [recordToEdit]);
 
   const prepareData = () => {
     const newRecord = {
@@ -20,7 +30,12 @@ function AddRecordForm({ onClose, onAddRecord, editRecord }) {
       type: isExpense ? "Expense" : "Income",
       category,
     };
-    onAddRecord(newRecord);
+
+    if (!recordToEdit) {
+      onAddRecord(newRecord);
+    } else {
+      onEditRecord(newRecord, recordToEdit.id);
+    }
   };
 
   const handleRadioChange = (expense) => {
@@ -44,7 +59,7 @@ function AddRecordForm({ onClose, onAddRecord, editRecord }) {
             label="Amount"
             placeholder="95"
             maxLength={16}
-            value={amount}
+            value={amount.toString()}
             onChange={(e) => setAmount(e.target.value)}
           />
           <FormField
@@ -78,6 +93,7 @@ function AddRecordForm({ onClose, onAddRecord, editRecord }) {
               <select
                 id="select-category"
                 className="block w-[50%] rounded-lg border bg-gray-50 px-2.5 py-1.5 text-gray-900"
+                value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="" disabled selected hidden>
@@ -96,7 +112,7 @@ function AddRecordForm({ onClose, onAddRecord, editRecord }) {
               className="box-border p-2 pl-5 pr-5 text-sm"
               onClick={prepareData}
             >
-              Add
+              {recordToEdit ? "Save" : "Add"}
             </button>
           </div>
         </div>
@@ -108,6 +124,14 @@ function AddRecordForm({ onClose, onAddRecord, editRecord }) {
 AddRecordForm.propTypes = {
   onClose: PropTypes.func.isRequired,
   onAddRecord: PropTypes.func.isRequired,
+  onEditRecord: PropTypes.func.isRequired,
+  recordToEdit: PropTypes.shape({
+    id: PropTypes.number,
+    valueType: PropTypes.string,
+    value: PropTypes.number,
+    description: PropTypes.string,
+    category: PropTypes.string,
+  }),
 };
 
 export default AddRecordForm;
