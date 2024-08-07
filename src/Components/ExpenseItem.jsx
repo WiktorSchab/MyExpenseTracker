@@ -1,6 +1,14 @@
 import PropTypes from "prop-types";
 
-function ExpenseItem({ valueType, value, description, type, category }) {
+function ExpenseItem({
+  id,
+  valueType,
+  value,
+  description,
+  type,
+  category,
+  onEditFunc,
+}) {
   return (
     <li className="flex flex-row bg-blue-600 p-2 text-left">
       <div className="flex w-[500px] flex-row items-center">
@@ -14,7 +22,7 @@ function ExpenseItem({ valueType, value, description, type, category }) {
         </div>
       </div>
       <div className="ml-auto">
-        <button>Edit</button>
+        <button onClick={() => onEditFunc(id)}>Edit</button>
         <button>Delete</button>
       </div>
     </li>
@@ -22,11 +30,13 @@ function ExpenseItem({ valueType, value, description, type, category }) {
 }
 
 ExpenseItem.propTypes = {
+  id: PropTypes.number.isRequired,
   valueType: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
   description: PropTypes.string,
   type: PropTypes.string.isRequired,
   category: PropTypes.string,
+  onEditFunc: PropTypes.func,
 };
 
 ExpenseItem.defaultProps = {
