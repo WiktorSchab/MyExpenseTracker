@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import FormField from "./FormField";
 import RadioButton from "./RadioButton";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { expenseCategories, incomeCategories } from "../Data/categories";
 
-function AddRecordForm({ onClose, onAddRecord }) {
+function AddRecordForm({ onClose, onAddRecord, editRecord }) {
   const [isExpense, setIsExpense] = useState(true);
   const [amount, setAmount] = useState(0);
   const [description, setDescription] = useState("");
@@ -12,7 +12,7 @@ function AddRecordForm({ onClose, onAddRecord }) {
 
   const optionsToShow = isExpense ? expenseCategories : incomeCategories;
 
-  function prepareData() {
+  const prepareData = () => {
     const newRecord = {
       valueType: isExpense ? "-" : "+",
       value: parseFloat(amount),
@@ -21,11 +21,11 @@ function AddRecordForm({ onClose, onAddRecord }) {
       category,
     };
     onAddRecord(newRecord);
-  }
+  };
 
   const handleRadioChange = (expense) => {
     setIsExpense(expense);
-    setCategory(""); // Wyczyść wybraną kategorię
+    setCategory("");
   };
 
   return (
@@ -44,6 +44,7 @@ function AddRecordForm({ onClose, onAddRecord }) {
             label="Amount"
             placeholder="95"
             maxLength={16}
+            value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
           <FormField
@@ -51,6 +52,7 @@ function AddRecordForm({ onClose, onAddRecord }) {
             label="Description"
             placeholder="Movie Night"
             maxLength={48}
+            value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
 
