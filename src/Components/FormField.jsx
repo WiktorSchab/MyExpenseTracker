@@ -1,6 +1,14 @@
 import PropTypes from "prop-types";
 
-function FormField({ id, label, placeholder, maxLength, onChange, value }) {
+function FormField({
+  id,
+  label,
+  placeholder,
+  maxLength,
+  onChange,
+  value,
+  validationError,
+}) {
   return (
     <div className="row col justify-start">
       <label
@@ -19,6 +27,11 @@ function FormField({ id, label, placeholder, maxLength, onChange, value }) {
         value={value}
         required
       />
+      {validationError && (
+        <span className="block text-left font-bold text-red-400">
+          {validationError}
+        </span>
+      )}
     </div>
   );
 }
@@ -30,6 +43,7 @@ FormField.propTypes = {
   maxLength: PropTypes.number,
   onChange: PropTypes.func,
   value: PropTypes.string,
+  validationError: PropTypes.string,
 };
 
 FormField.defaultProps = {
