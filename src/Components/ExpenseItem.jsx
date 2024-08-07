@@ -8,6 +8,7 @@ function ExpenseItem({
   type,
   category,
   onEditFunc,
+  onDelFunc,
 }) {
   return (
     <li className="flex flex-row bg-blue-600 p-2 text-left">
@@ -23,7 +24,7 @@ function ExpenseItem({
       </div>
       <div className="ml-auto">
         <button onClick={() => onEditFunc(id)}>Edit</button>
-        <button>Delete</button>
+        <button onClick={() => onDelFunc(id)}>Delete</button>
       </div>
     </li>
   );
@@ -37,6 +38,7 @@ ExpenseItem.propTypes = {
   type: PropTypes.string.isRequired,
   category: PropTypes.string,
   onEditFunc: PropTypes.func,
+  onDelFunc: PropTypes.func,
 };
 
 ExpenseItem.defaultProps = {
