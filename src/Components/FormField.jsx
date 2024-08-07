@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-function FormField({ id, label, placeholder, maxLength, onChange }) {
+function FormField({ id, label, placeholder, maxLength, onChange, value }) {
   return (
     <div className="row col justify-start">
       <label
@@ -16,6 +16,7 @@ function FormField({ id, label, placeholder, maxLength, onChange }) {
         placeholder={placeholder}
         maxLength={maxLength}
         onChange={onChange}
+        value={value}
         required
       />
     </div>
@@ -28,6 +29,7 @@ FormField.propTypes = {
   placeholder: PropTypes.string.isRequired,
   maxLength: PropTypes.number,
   onChange: PropTypes.func,
+  value: PropTypes.string,
 };
 
 FormField.defaultProps = {
