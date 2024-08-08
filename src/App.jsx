@@ -96,6 +96,7 @@ function App() {
               description={transaction.description}
               type={transaction.type}
               category={transaction.category}
+              date={transaction.date}
               onEditFunc={handleEditRecord}
               onDelFunc={handleDeleteRecord}
             />

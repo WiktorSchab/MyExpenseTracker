@@ -7,19 +7,27 @@ function ExpenseItem({
   description,
   type,
   category,
+  date,
   onEditFunc,
   onDelFunc,
 }) {
   return (
     <li className="flex flex-row bg-blue-600 p-2 text-left">
-      <div className="flex w-[500px] flex-row items-center">
-        <p className="w-[150px]">
-          {valueType}
-          {value}$ {description}
-        </p>
-        <div className="ml-5">
-          <p>Type: {type}</p>
-          <p>Category: {category}</p>
+      <div className="flex w-[500px] justify-between">
+        <div className="flex flex-row items-center">
+          <p className="w-[150px]">
+            {valueType}
+            {value}$ {description}
+          </p>
+          <div className="ml-5">
+            <p>Type: {type}</p>
+            <p>Category: {category}</p>
+          </div>
+        </div>
+
+        <div className="mr-5 flex flex-col items-center">
+          <p>Date:</p>
+          <p>{date}</p>
         </div>
       </div>
       <div className="ml-auto">
@@ -37,6 +45,7 @@ ExpenseItem.propTypes = {
   description: PropTypes.string,
   type: PropTypes.string.isRequired,
   category: PropTypes.string,
+  date: PropTypes.string,
   onEditFunc: PropTypes.func,
   onDelFunc: PropTypes.func,
 };
