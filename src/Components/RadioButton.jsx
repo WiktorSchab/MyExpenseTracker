@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-function RadioButton({ id, name, value, labelValue, onClick, isChecked }) {
+function RadioButton({ id, name, value, labelValue, onChange, isChecked }) {
   return (
     <>
       <label className="flex cursor-pointer items-center">
@@ -10,7 +10,7 @@ function RadioButton({ id, name, value, labelValue, onClick, isChecked }) {
           name={name}
           value={value}
           className="peer hidden"
-          onClick={onClick}
+          onChange={onChange}
           checked={isChecked}
         />
         <span className="mr-2 inline-block h-4 w-4 rounded-full border border-blue-500 peer-checked:border-transparent peer-checked:bg-blue-500"></span>
@@ -25,12 +25,12 @@ RadioButton.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   labelValue: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
+  onChange: PropTypes.func,
   isChecked: PropTypes.bool,
 };
 
 RadioButton.defaultProps = {
-  isChecked: false,
+  onChange: false,
 };
 
 export default RadioButton;
