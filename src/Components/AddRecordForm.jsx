@@ -97,6 +97,7 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
               value="-"
               labelValue="Expense"
               onClick={() => handleRadioChange(true)}
+              isChecked={isExpense}
             />
             <RadioButton
               id="income"
@@ -104,6 +105,7 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
               value="+"
               labelValue="Income"
               onClick={() => handleRadioChange(false)}
+              isChecked={!isExpense}
             />
           </div>
 
