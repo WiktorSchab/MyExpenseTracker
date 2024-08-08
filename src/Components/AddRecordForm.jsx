@@ -3,6 +3,7 @@ import FormField from "./FormField";
 import RadioButton from "./RadioButton";
 import { useEffect, useState } from "react";
 import { expenseCategories, incomeCategories } from "../Data/categories";
+import CheckBox from "./CheckBox";
 
 function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
   const [isExpense, setIsExpense] = useState(true);
@@ -11,6 +12,8 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
   const [category, setCategory] = useState("");
 
   const [amountError, setAmountError] = useState("");
+
+  const [isDateVisible, setIsDateVisible] = useState(false);
 
   const optionsToShow = isExpense ? expenseCategories : incomeCategories;
 
@@ -90,44 +93,67 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
             onChange={(e) => setDescription(e.target.value)}
           />
 
-          <div className="flex flex-row gap-5">
-            <RadioButton
-              id="expense"
-              name="category"
-              value="-"
-              labelValue="Expense"
-              onClick={() => handleRadioChange(true)}
-              isChecked={isExpense}
-            />
-            <RadioButton
-              id="income"
-              name="category"
-              value="+"
-              labelValue="Income"
-              onClick={() => handleRadioChange(false)}
-              isChecked={!isExpense}
-            />
+          <div className="flex w-[65%] flex-row justify-between">
+            <div className="flex flex-row gap-5">
+              <RadioButton
+                id="expense"
+                name="category"
+                value="-"
+                labelValue="Expense"
+                onChange={() => handleRadioChange(true)}
+                isChecked={isExpense}
+              />
+              <RadioButton
+                id="income"
+                name="category"
+                value="+"
+                labelValue="Income"
+                onChange={() => handleRadioChange(false)}
+                isChecked={!isExpense}
+              />
+            </div>
+
+            <div className="mr-5">
+              <CheckBox
+                id="dataCheckBox"
+                name="dataCheckBox"
+                labelValue="Choose date"
+                onChange={() => setIsDateVisible((prevState) => !prevState)}
+                isChecked={isDateVisible}
+              />
+            </div>
           </div>
 
           <div className="flex justify-between">
-            <div className="row flex w-[50%] items-center gap-5">
-              <select
-                id="select-category"
-                className="block w-[50%] rounded-lg border bg-gray-50 px-2.5 py-1.5 text-gray-900"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              >
-                <option value="Other" selected>
-                  Other
-                </option>
-
-                {optionsToShow.map((value, id) => (
-                  <option key={id} value={value}>
-                    {value}
+            <div className="flex w-[100%] flex-row">
+              <div className="flex w-[50%] flex-row items-center gap-5">
+                <select
+                  id="select-category"
+                  className="block w-[50%] rounded-lg border bg-gray-50 px-2.5 py-1.5 text-gray-900"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                >
+                  <option value="Other" selected>
+                    Other
                   </option>
-                ))}
-              </select>
-              <label htmlFor="select-category">Category</label>
+
+                  {optionsToShow.map((value, id) => (
+                    <option key={id} value={value}>
+                      {value}
+                    </option>
+                  ))}
+                </select>
+                <label htmlFor="select-category">Category</label>
+              </div>
+
+              <div>
+                {isDateVisible && (
+                  <input
+                    type="date"
+                    className="black-calendar block w-full rounded-xl border bg-gray-50 px-2.5 py-1.5 text-sm text-black"
+                  />
+                )}
+              </div>
             </div>
             <button
               className="box-border p-2 pl-5 pr-5 text-sm"
