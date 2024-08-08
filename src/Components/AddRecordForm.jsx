@@ -117,8 +117,8 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
-                <option value="" disabled selected hidden>
-                  {isExpense ? "Expense" : "Income"}
+                <option value="Other" selected>
+                  Other
                 </option>
 
                 {optionsToShow.map((value, id) => (
