@@ -10,6 +10,7 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
   const [amount, setAmount] = useState(0);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
+  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
 
   const [amountError, setAmountError] = useState("");
 
@@ -24,6 +25,7 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
       setAmount(record.value);
       setDescription(record.description);
       setCategory(record.category);
+      setDate(record.date);
     }
   }, [recordToEdit]);
 
@@ -34,6 +36,7 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
       description,
       type: isExpense ? "Expense" : "Income",
       category,
+      date: date,
     };
 
     if (!recordToEdit) {
@@ -46,6 +49,12 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
   const handleRadioChange = (expense) => {
     setIsExpense(expense);
     setCategory("");
+  };
+
+  const handleCheckBoxChange = () => {
+    setIsDateVisible((prevState) => !prevState);
+    // Reseting Date
+    setDate(new Date().toISOString().split("T")[0]);
   };
 
   const amountValidation = (e) => {
@@ -118,7 +127,7 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
                 id="dataCheckBox"
                 name="dataCheckBox"
                 labelValue="Choose date"
-                onChange={() => setIsDateVisible((prevState) => !prevState)}
+                onChange={handleCheckBoxChange}
                 isChecked={isDateVisible}
               />
             </div>
@@ -151,6 +160,8 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
                   <input
                     type="date"
                     className="black-calendar block w-full rounded-xl border bg-gray-50 px-2.5 py-1.5 text-sm text-black"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
                   />
                 )}
               </div>
