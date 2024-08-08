@@ -5,6 +5,7 @@ export const transactions = [
     description: "Salary",
     type: "Income",
     category: "Work",
+    date: "2024-01-15",
   },
   {
     valueType: "-",
@@ -12,6 +13,7 @@ export const transactions = [
     description: "Groceries",
     type: "Expense",
     category: "Food",
+    date: "2024-01-20",
   },
   {
     valueType: "-",
@@ -19,6 +21,7 @@ export const transactions = [
     description: "Internet Bill",
     type: "Expense",
     category: "Utilities",
+    date: "2024-02-05",
   },
   {
     valueType: "+",
@@ -26,6 +29,7 @@ export const transactions = [
     description: "Freelance Project",
     type: "Income",
     category: "Work",
+    date: "2024-03-10",
   },
   {
     valueType: "-",
@@ -33,5 +37,6 @@ export const transactions = [
     description: "Movie Night",
     type: "Expense",
     category: "Entertainment",
+    date: "2024-03-15",
   },
 ];
