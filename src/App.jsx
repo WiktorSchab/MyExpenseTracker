@@ -28,7 +28,7 @@ function App() {
     setTransactions(sortedTransactions);
 
     console.log(amountSorting, isDateSortDesc);
-  }, [amountSorting, isDateSortDesc]);
+  }, [amountSorting, isDateSortDesc, isFormDisplayed]);
 
   const handleSortDateToggle = () => {
     setIsDateSortDesc((prevState) => !prevState);
