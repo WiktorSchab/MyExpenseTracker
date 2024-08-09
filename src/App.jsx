@@ -23,13 +23,29 @@ function App() {
       sortedTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
     }
 
+    if (amountSorting === "desc") {
+      sortedTransactions.sort((a, b) => a.value - b.value);
+    } else if (amountSorting === "asc") {
+      sortedTransactions.sort((a, b) => b.value - a.value);
+    }
+
     setTransactions(sortedTransactions);
 
     console.log(amountSorting, isDateSortDesc);
   }, [amountSorting, isDateSortDesc]);
 
-  const handleSortToggle = () => {
+  const handleSortDateToggle = () => {
     setIsDateSortDesc((prevState) => !prevState);
+  };
+
+  const handleSortAmount = () => {
+    if (!amountSorting) {
+      setAmountSorting("asc");
+    } else if (amountSorting === "asc") {
+      setAmountSorting("desc");
+    } else {
+      setAmountSorting(null);
+    }
   };
 
   const handleAddClick = () => {
@@ -104,10 +120,17 @@ function App() {
         <div className="group relative flex">
           <button>Sort By</button>
           <ul className="absolute top-11 hidden w-[100%] rounded-md bg-blue-400 text-lg group-hover:block">
-            <li className="blue-li rounded-t-lg">Amount</li>
+            <li className="blue-li rounded-t-lg" onClick={handleSortAmount}>
+              Amount{" "}
+              {amountSorting === "asc"
+                ? "↑"
+                : amountSorting === "desc"
+                  ? "↓"
+                  : ""}
+            </li>
             <li
               className="blue-li rounded-b-lg border-t-[0px]"
-              onClick={handleSortToggle}
+              onClick={handleSortDateToggle}
             >
               Date {isDateSortDesc ? "↓" : "↑"}
             </li>
