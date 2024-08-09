@@ -78,7 +78,13 @@ function App() {
         <div>there will be slider</div>
 
         {/* Button that shows sorting options by date/amount */}
-        <button>sort</button>
+        <div className="group relative flex">
+          <button>Sort By</button>
+          <ul className="absolute top-11 hidden w-[100%] rounded-md bg-blue-400 text-lg group-hover:block">
+            <li className="blue-li rounded-t-lg">Amount</li>
+            <li className="blue-li rounded-b-lg border-t-[0px]">Date</li>
+          </ul>
+        </div>
 
         {/*Show only expenses/earnings (toogle) */}
         <button>Show expenses </button>
