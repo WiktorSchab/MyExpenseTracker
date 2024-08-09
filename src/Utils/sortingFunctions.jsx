@@ -6,7 +6,7 @@ const sortingUtils = {
    * @param {boolean} con - Determines the sorting order.
    *   - If `true`, sorts in descending order (latest dates first).
    *   - If `false`, sorts in ascending order (earliest dates first).
-   * @returns {Array} - The sorted array of transactions.
+   * @returns {Array} - The sorted array (obj) of transactions.
    */
   sortByDate: (obj, con) => {
     if (con) {
@@ -25,7 +25,7 @@ const sortingUtils = {
    * @param {boolean} con - Determines the sorting order.
    *   - If `true`, sorts in ascending order (smallest values first).
    *   - If `false`, sorts in descending order (largest values first).
-   * @returns {Array} - The sorted array of transactions.
+   * @returns {Array} - The sorted array (obj) of transactions.
    */
   sortByValue: (obj, con) => {
     obj.sort((a, b) => {
@@ -35,6 +35,23 @@ const sortingUtils = {
       return con ? aValue - bValue : bValue - aValue;
     });
     return obj;
+  },
+
+  /**
+   * Filters an array of transactions based on the valueType.
+   *
+   * @param {Array} obj - The array of transactions to be filtered.
+   * @param {string} con - The type of transactions to filter.
+   *   - If "expenses", returns only transactions with a valueType of "-".
+   *   - else, returns only transactions with a valueType of "+".
+   * @returns {Array} - The filtered new array of transactions.
+   */
+  filterByType: (obj, filterType) => {
+    if (filterType === "expenses") {
+      return obj.filter((transaction) => transaction.valueType === "-");
+    } else {
+      return obj.filter((transaction) => transaction.valueType === "+");
+    }
   },
 };
 
