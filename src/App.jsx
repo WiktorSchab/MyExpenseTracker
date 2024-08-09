@@ -3,6 +3,7 @@ import "./App.css";
 import ExpenseItem from "./Components/ExpenseItem";
 import { transactions as initialTransactions } from "./Data/transactions";
 import AddRecordForm from "./Components/AddRecordForm";
+import sortingUtils from "./Utils/sortingFunctions";
 
 function App() {
   const [transactions, setTransactions] = useState(initialTransactions);
@@ -17,16 +18,11 @@ function App() {
     const sortedTransactions = [...transactions];
 
     // Sorting by date
-    if (isDateSortDesc) {
-      sortedTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
-    } else {
-      sortedTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
-    }
+    sortingUtils.sortByDate(sortedTransactions, isDateSortDesc);
 
-    if (amountSorting === "desc") {
-      sortedTransactions.sort((a, b) => a.value - b.value);
-    } else if (amountSorting === "asc") {
-      sortedTransactions.sort((a, b) => b.value - a.value);
+    // Sorting by amount
+    if (amountSorting) {
+      sortingUtils.sortByValue(sortedTransactions, amountSorting === "desc");
     }
 
     setTransactions(sortedTransactions);
