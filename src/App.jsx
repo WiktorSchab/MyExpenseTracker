@@ -7,15 +7,20 @@ import sortingUtils from "./Utils/sortingFunctions";
 
 function App() {
   const [transactions, setTransactions] = useState(initialTransactions);
+  const [filteredTransactions, setFilteredTransactions] =
+    useState(initialTransactions);
+
   const [isFormDisplayed, setIsFormDisplayed] = useState(false);
   const [editRecord, setEditRecord] = useState(null);
 
   const [amountSorting, setAmountSorting] = useState(null);
   const [isDateSortDesc, setIsDateSortDesc] = useState(true);
 
-  // useEffect for sorting
+  const [typeRecordFilter, setTypeRecordFilter] = useState(null);
+
+  // useEffect for sorting and filtering
   useEffect(() => {
-    const sortedTransactions = [...transactions];
+    let sortedTransactions = [...transactions];
 
     // Sorting by date
     sortingUtils.sortByDate(sortedTransactions, isDateSortDesc);
@@ -25,13 +30,29 @@ function App() {
       sortingUtils.sortByValue(sortedTransactions, amountSorting === "desc");
     }
 
-    setTransactions(sortedTransactions);
+    // Filtering by type (expenses/incomes)
+    if (typeRecordFilter) {
+      sortedTransactions = sortingUtils.filterByType(
+        sortedTransactions,
+        typeRecordFilter,
+      );
+    }
 
-    console.log(amountSorting, isDateSortDesc);
-  }, [amountSorting, isDateSortDesc, isFormDisplayed]);
+    setFilteredTransactions(sortedTransactions);
+  }, [amountSorting, isDateSortDesc, typeRecordFilter, transactions]);
 
   const handleSortDateToggle = () => {
     setIsDateSortDesc((prevState) => !prevState);
+  };
+
+  const handleShowRecords = () => {
+    if (!typeRecordFilter) {
+      setTypeRecordFilter("expenses");
+    } else if (typeRecordFilter === "expenses") {
+      setTypeRecordFilter("incomes");
+    } else {
+      setTypeRecordFilter(null);
+    }
   };
 
   const handleSortAmount = () => {
@@ -134,13 +155,20 @@ function App() {
         </div>
 
         {/*Show only expenses/earnings (toogle) */}
-        <button>Show expenses </button>
+        <button onClick={handleShowRecords}>
+          Show{" "}
+          {typeRecordFilter === "expenses"
+            ? "expenses"
+            : typeRecordFilter === "incomes"
+              ? "incomes"
+              : "all"}
+        </button>
       </div>
 
       {/* List of expenses and earnings */}
       <div className="flex justify-center">
         <ul className="mt-2 flex h-[350px] w-[85%] flex-col gap-2 overflow-auto bg-blue-200 p-2">
-          {transactions.map((transaction, index) => (
+          {filteredTransactions.map((transaction, index) => (
             <ExpenseItem
               key={index}
               id={index}
