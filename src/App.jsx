@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import ExpenseItem from "./Components/ExpenseItem";
 import { transactions as initialTransactions } from "./Data/transactions";
@@ -9,22 +9,34 @@ function App() {
   const [isFormDisplayed, setIsFormDisplayed] = useState(false);
   const [editRecord, setEditRecord] = useState(null);
 
+  const [amountSorting, setAmountSorting] = useState(null);
+  const [isDateSortDesc, setIsDateSortDesc] = useState(true);
+
+  // useEffect for sorting
+  useEffect(() => {
+    const sortedTransactions = [...transactions];
+
+    // Sorting by date
+    if (isDateSortDesc) {
+      sortedTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } else {
+      sortedTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+
+    setTransactions(sortedTransactions);
+
+    console.log(amountSorting, isDateSortDesc);
+  }, [amountSorting, isDateSortDesc]);
+
+  const handleSortToggle = () => {
+    setIsDateSortDesc((prevState) => !prevState);
+  };
+
   const handleAddClick = () => {
     setIsFormDisplayed(true);
     setEditRecord(null);
   };
   const handleCloseForm = () => setIsFormDisplayed(false);
-
-  const renderAddButton = () => {
-    return (
-      <button
-        onClick={handleAddClick}
-        className="small-round-button absolute bottom-0 right-0 m-2"
-      >
-        Add
-      </button>
-    );
-  };
 
   const handleAddRecord = (newRecord) => {
     setTransactions([...transactions, newRecord]);
@@ -61,6 +73,17 @@ function App() {
     setTransactions(updatedTransactions);
   };
 
+  const renderAddButton = () => {
+    return (
+      <button
+        onClick={handleAddClick}
+        className="small-round-button absolute bottom-0 right-0 m-2"
+      >
+        Add
+      </button>
+    );
+  };
+
   return (
     <div className="text-whitept-2 relative h-auto min-h-[850px] w-[900px] bg-blue-500 px-5">
       <h1 className="mb-2 mt-5">Monthly expenses</h1>
@@ -82,7 +105,12 @@ function App() {
           <button>Sort By</button>
           <ul className="absolute top-11 hidden w-[100%] rounded-md bg-blue-400 text-lg group-hover:block">
             <li className="blue-li rounded-t-lg">Amount</li>
-            <li className="blue-li rounded-b-lg border-t-[0px]">Date</li>
+            <li
+              className="blue-li rounded-b-lg border-t-[0px]"
+              onClick={handleSortToggle}
+            >
+              Date {isDateSortDesc ? "↓" : "↑"}
+            </li>
           </ul>
         </div>
 
