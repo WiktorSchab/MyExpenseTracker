@@ -39,4 +39,12 @@ export const transactions = [
     category: "Entertainment",
     date: "2024-03-15",
   },
+  {
+    valueType: "-",
+    value: 250.0,
+    description: "Movie Day",
+    type: "Expense",
+    category: "Entertainment",
+    date: "2024-03-14",
+  },
 ];

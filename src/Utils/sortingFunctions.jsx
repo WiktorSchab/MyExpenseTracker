@@ -19,23 +19,23 @@ const sortingUtils = {
   },
 
   /**
-   * Sorts an array of transactions by value.
-   *
-   * @param {Array} obj - The array of transactions to be sorted.
-   * @param {boolean} con - Determines the sorting order.
-   *   - If `true`, sorts in ascending order (lowest values first).
-   *   - If `false`, sorts in descending order (highest values first).
-   * @returns {Array} - The sorted array of transactions.
-   */
-  sortByValue: (obj, con) => {
-    if (con) {
-      obj.sort((a, b) => a.value - b.value);
-    } else {
-      obj.sort((a, b) => b.value - a.value);
-    }
+ * Sorts an array of transactions by value, taking into account if the value is negative (valueType).
+ *
+ * @param {Array} obj - The array of transactions to be sorted.
+ * @param {boolean} con - Determines the sorting order.
+ *   - If `true`, sorts in ascending order (smallest values first).
+ *   - If `false`, sorts in descending order (largest values first).
+ * @returns {Array} - The sorted array of transactions.
+ */
+const sortByValue = (obj, con) => {
+  obj.sort((a, b) => {
+    const aValue = a.valueType === "-" ? -a.value : a.value;
+    const bValue = b.valueType === "-" ? -b.value : b.value;
 
-    return obj;
-  },
+    return con ? aValue - bValue : bValue - aValue;
+  });
+  return obj;
 };
+
 
 export default sortingUtils;
