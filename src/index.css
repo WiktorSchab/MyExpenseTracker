@@ -10,6 +10,21 @@
   .blue-li {
     @apply cursor-pointer border border-white py-1 hover:bg-blue-500 hover:text-white;
   }
+
+  .input-number {
+    @apply rounded-md border border-gray-300 bg-white px-2 py-1 text-sm text-black focus:border-blue-500 focus:outline-none;
+
+    /* Hiding arrows in input */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      @apply hidden;
+    }
+
+    /* Hiding in Firefox */
+    &[type="number"] {
+      -moz-appearance: textfield;
+    }
+  }
 }
 
 :root {
