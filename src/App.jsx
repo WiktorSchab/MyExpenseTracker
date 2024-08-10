@@ -13,10 +13,12 @@ function App() {
   const [isFormDisplayed, setIsFormDisplayed] = useState(false);
   const [editRecord, setEditRecord] = useState(null);
 
+  // for sorting, filtering etc
   const [amountSorting, setAmountSorting] = useState(null);
   const [isDateSortDesc, setIsDateSortDesc] = useState(true);
-
   const [typeRecordFilter, setTypeRecordFilter] = useState(null);
+  const [minValue, setMinValue] = useState(null);
+  const [maxValue, setMaxValue] = useState(null);
 
   // useEffect for sorting and filtering
   useEffect(() => {
@@ -38,8 +40,24 @@ function App() {
       );
     }
 
+    // Filtering by min and max value
+    if (minValue || maxValue) {
+      sortedTransactions = sortingUtils.filterByMaxMinValue(
+        sortedTransactions,
+        minValue,
+        maxValue,
+      );
+    }
+
     setFilteredTransactions(sortedTransactions);
-  }, [amountSorting, isDateSortDesc, typeRecordFilter, transactions]);
+  }, [
+    amountSorting,
+    isDateSortDesc,
+    typeRecordFilter,
+    minValue,
+    maxValue,
+    transactions,
+  ]);
 
   const handleSortDateToggle = () => {
     setIsDateSortDesc((prevState) => !prevState);
@@ -130,8 +148,27 @@ function App() {
 
       {/* Buttons for filtering etc */}
       <div className="mt-3 flex justify-end gap-3">
-        {/* Slider for money range? (idk how to name it)  */}
-        <div>there will be slider</div>
+        {/* Min/Max value range filter */}
+        <div>
+          <p>Value Range</p>
+          <div className="flex gap-2">
+            <input
+              className="input-number w-[65px]"
+              placeholder="min"
+              type="number"
+              value={minValue}
+              onChange={(e) => setMinValue(e.target.value)}
+            />
+            <p>-</p>
+            <input
+              className="input-number w-[65px]"
+              placeholder="max"
+              type="number"
+              value={maxValue}
+              onChange={(e) => setMaxValue(e.target.value)}
+            />
+          </div>
+        </div>
 
         {/* Button that shows sorting options by date/amount */}
         <div className="group relative flex">
