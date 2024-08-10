@@ -53,6 +53,32 @@ const sortingUtils = {
       return obj.filter((transaction) => transaction.valueType === "+");
     }
   },
+
+  /**
+   * Filters an array of transactions based on the value range (minValue and maxValue).
+   *
+   * @param {Array} obj - The array of transactions to be filtered.
+   * @param {number} minValue - The minimum value to filter by (inclusive).
+   * @param {number} maxValue - The maximum value to filter by (inclusive).
+   * @returns {Array} - The filtered new array of transactions.
+   */
+
+  filterByMaxMinValue: (obj, minValue, maxValue) => {
+    return obj.filter((transaction) => {
+      const value =
+        transaction.valueType === "-" ? -transaction.value : transaction.value;
+
+      if (minValue && maxValue) {
+        return value >= minValue && value <= maxValue;
+      }
+      if (minValue) {
+        return value >= minValue;
+      }
+      if (maxValue) {
+        return value <= maxValue;
+      }
+    });
+  },
 };
 
 export default sortingUtils;
