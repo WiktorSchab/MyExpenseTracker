@@ -29,7 +29,7 @@ function App() {
     <div className="text-whitept-2 relative h-auto min-h-[850px] w-[900px] bg-blue-500 px-5">
       <Header date={date} setDate={setDate} />
 
-      <Balance />
+      <Balance transactions={filteredTransactions} />
 
       <ControlPanel
         transactions={transactions}
