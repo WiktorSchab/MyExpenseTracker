@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import sortingUtils from "../Utils/sortingFunctions";
+import sortingUtils from "../Lib/sortingFunctions";
+import { transactionShape } from "../Lib/types";
 
 function ControlPanel({ transactions, setFilteredTransactions }) {
-  console.log(transactions);
   // for sorting, filtering etc
   const [amountSorting, setAmountSorting] = useState(null);
   const [isDateSortDesc, setIsDateSortDesc] = useState(true);
@@ -42,6 +42,7 @@ function ControlPanel({ transactions, setFilteredTransactions }) {
     }
 
     setFilteredTransactions(sortedTransactions);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     amountSorting,
     isDateSortDesc,
@@ -134,15 +135,7 @@ function ControlPanel({ transactions, setFilteredTransactions }) {
 }
 
 ControlPanel.propTypes = {
-  transactions: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      valueType: PropTypes.string,
-      value: PropTypes.number,
-      description: PropTypes.string,
-      category: PropTypes.string,
-    }),
-  ),
+  transactions: PropTypes.arrayOf(transactionShape),
   setFilteredTransactions: PropTypes.func,
 };
 

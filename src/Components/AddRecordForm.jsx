@@ -4,6 +4,7 @@ import RadioButton from "./RadioButton";
 import { useEffect, useState } from "react";
 import { expenseCategories, incomeCategories } from "../Data/categories";
 import CheckBox from "./CheckBox";
+import { transactionShape } from "../Lib/types";
 
 function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
   const [isExpense, setIsExpense] = useState(true);
@@ -183,13 +184,7 @@ AddRecordForm.propTypes = {
   onClose: PropTypes.func.isRequired,
   onAddRecord: PropTypes.func.isRequired,
   onEditRecord: PropTypes.func.isRequired,
-  recordToEdit: PropTypes.shape({
-    id: PropTypes.number,
-    valueType: PropTypes.string,
-    value: PropTypes.number,
-    description: PropTypes.string,
-    category: PropTypes.string,
-  }),
+  recordToEdit: transactionShape,
 };
 
 export default AddRecordForm;

@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 
 import ExpenseItem from "./ExpenseItem";
 import AddRecordForm from "./AddRecordForm";
+import { transactionShape } from "../Lib/types";
 
 function TransactionList({
   transactions,
   setTransactions,
   filteredTransactions,
 }) {
-  console.log(filteredTransactions);
   const [isFormDisplayed, setIsFormDisplayed] = useState(false);
   const [editRecord, setEditRecord] = useState(null);
 
@@ -107,25 +107,9 @@ function TransactionList({
 }
 
 TransactionList.propTypes = {
-  transactions: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      valueType: PropTypes.string,
-      value: PropTypes.number,
-      description: PropTypes.string,
-      category: PropTypes.string,
-    }),
-  ),
+  transactions: PropTypes.arrayOf(transactionShape),
   setTransactions: PropTypes.func,
-  filteredTransactions: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      valueType: PropTypes.string,
-      value: PropTypes.number,
-      description: PropTypes.string,
-      category: PropTypes.string,
-    }),
-  ),
+  filteredTransactions: PropTypes.arrayOf(transactionShape),
 };
 
 export default TransactionList;
