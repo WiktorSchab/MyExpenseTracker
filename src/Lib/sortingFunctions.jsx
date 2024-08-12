@@ -32,7 +32,7 @@ const sortingUtils = {
       const aValue = a.valueType === "-" ? -a.value : a.value;
       const bValue = b.valueType === "-" ? -b.value : b.value;
 
-      return con ? aValue - bValue : bValue - aValue;
+      return con ? bValue - aValue : aValue - bValue;
     });
     return obj;
   },
