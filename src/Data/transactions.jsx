@@ -5,7 +5,7 @@ export const transactions = [
     description: "Salary",
     type: "Income",
     category: "Work",
-    date: "2024-01-15",
+    date: "2024-08-15",
   },
   {
     valueType: "-",
@@ -13,7 +13,7 @@ export const transactions = [
     description: "Groceries",
     type: "Expense",
     category: "Food",
-    date: "2024-01-20",
+    date: "2024-08-20",
   },
   {
     valueType: "-",
@@ -21,7 +21,7 @@ export const transactions = [
     description: "Internet Bill",
     type: "Expense",
     category: "Utilities",
-    date: "2024-02-05",
+    date: "2024-08-05",
   },
   {
     valueType: "+",
@@ -29,7 +29,7 @@ export const transactions = [
     description: "Freelance Project",
     type: "Income",
     category: "Work",
-    date: "2024-03-10",
+    date: "2024-08-10",
   },
   {
     valueType: "-",
@@ -37,7 +37,7 @@ export const transactions = [
     description: "Movie Night",
     type: "Expense",
     category: "Entertainment",
-    date: "2024-03-15",
+    date: "2024-08-15",
   },
   {
     valueType: "-",
@@ -45,6 +45,6 @@ export const transactions = [
     description: "Movie Day",
     type: "Expense",
     category: "Entertainment",
-    date: "2024-03-14",
+    date: "2024-08-14",
   },
 ];
