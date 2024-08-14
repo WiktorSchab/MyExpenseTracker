@@ -14,7 +14,7 @@ function ChartComponent({ chartType, labels, data, informations, styles }) {
     pBColor = "rgb(255, 255, 255)",
     pBWidth = 2,
     pRadius = 5,
-    height = "!h-[300px]",
+    height = "!h-[325px]",
     width = "w-auto",
     padding = "pt-2",
     margin = "m-0",

@@ -26,21 +26,23 @@ function App() {
   }, [date, transactions]);
 
   return (
-    <div className="text-whitept-2 relative h-auto min-h-[850px] w-[900px] bg-blue-500 px-5">
-      <Header date={date} setDate={setDate} />
+    <div className="flex items-center justify-center">
+      <div className="relative h-[900px] w-[1440px] bg-blue-500 px-5 text-white">
+        <Header date={date} setDate={setDate} />
 
-      <Balance transactions={filteredTransactions} />
+        <Balance transactions={filteredTransactions} />
 
-      <ControlPanel
-        transactions={transactions}
-        setFilteredTransactions={setFilteredTransactions}
-      />
+        <ControlPanel
+          transactions={transactions}
+          setFilteredTransactions={setFilteredTransactions}
+        />
 
-      <TransactionList
-        transactions={transactions}
-        filteredTransactions={filteredTransactions}
-        setTransactions={setTransactions}
-      />
+        <TransactionList
+          transactions={transactions}
+          filteredTransactions={filteredTransactions}
+          setTransactions={setTransactions}
+        />
+      </div>
     </div>
   );
 }

@@ -73,7 +73,7 @@ function TransactionList({
     <>
       {/* List of expenses and earnings */}
       <div className="flex justify-center">
-        <ul className="mt-2 flex h-[350px] w-[85%] flex-col gap-2 overflow-auto bg-blue-200 p-2">
+        <ul className="mt-2 flex h-[372px] w-[85%] flex-col gap-2 overflow-auto bg-blue-200 p-2">
           {filteredTransactions.map((transaction, index) => (
             <ExpenseItem
               key={index}
