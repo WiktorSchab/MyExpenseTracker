@@ -14,6 +14,10 @@ function ChartComponent({ chartType, labels, data, informations, styles }) {
     pBColor = "rgb(255, 255, 255)",
     pBWidth = 2,
     pRadius = 5,
+    height = "!h-[300px]",
+    width = "w-auto",
+    padding = "pt-2",
+    margin = "m-0",
   } = styles;
 
   // Informations for chart (labels etc)
@@ -91,7 +95,10 @@ function ChartComponent({ chartType, labels, data, informations, styles }) {
   }, [labels, data]);
 
   return (
-    <canvas ref={canvasRef} className={`${bgColor} !h-[300px] p-2`}></canvas>
+    <canvas
+      ref={canvasRef}
+      className={`${bgColor} ${height} ${width} ${margin} ${padding}`}
+    ></canvas>
   );
 }
 
@@ -112,6 +119,10 @@ ChartComponent.propTypes = {
     pBColor: PropTypes.string,
     pBWidth: PropTypes.number,
     pRadius: PropTypes.number,
+    height: PropTypes.string,
+    width: PropTypes.string,
+    margin: PropTypes.string,
+    padding: PropTypes.string,
   }),
 };
 
