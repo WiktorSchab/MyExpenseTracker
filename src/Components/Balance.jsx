@@ -12,7 +12,7 @@ function Balance({ transactions }) {
   const callbackLabelFun = (context) => {
     const day = context.label;
     const balance = context.raw;
-    return `Day: ${day}, Balance: ${balance}`;
+    return `Day: ${day}, Balance: ${balance.toFixed(2)}`;
   };
 
   useEffect(() => {
@@ -52,7 +52,9 @@ function Balance({ transactions }) {
 
   return (
     <div className="flex flex-col items-center">
-      <h3 className="mb-2 mt-2">Balance of the month: {lastDayBalance}$</h3>
+      <h3 className="mb-2 mt-2">
+        Balance of the month: {lastDayBalance.toFixed(2)}$
+      </h3>
       <div className="border-2 border-slate-50">
         <ChartComponent
           chartType="line"

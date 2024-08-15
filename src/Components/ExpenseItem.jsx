@@ -17,7 +17,7 @@ function ExpenseItem({
         <div className="flex flex-row items-center">
           <p className="w-[150px]">
             {valueType}
-            {value}$ {description}
+            {value.toFixed(2)}$ {description}
           </p>
           <div className="ml-5">
             <p>Type: {type}</p>
