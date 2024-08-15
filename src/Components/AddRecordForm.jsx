@@ -10,7 +10,7 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
   const [isExpense, setIsExpense] = useState(true);
   const [amount, setAmount] = useState(0);
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("Other");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
 
   const [amountError, setAmountError] = useState(null);
@@ -55,7 +55,7 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
 
   const handleRadioChange = (expense) => {
     setIsExpense(expense);
-    setCategory("");
+    setCategory("Other");
   };
 
   const handleCheckBoxChange = () => {
