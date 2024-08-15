@@ -13,11 +13,17 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
   const [category, setCategory] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
 
-  const [amountError, setAmountError] = useState("");
+  const [amountError, setAmountError] = useState(null);
 
   const [isDateVisible, setIsDateVisible] = useState(false);
 
   const optionsToShow = isExpense ? expenseCategories : incomeCategories;
+
+  // Add every Error state variable to this array
+  const errorsList = [amountError];
+
+  // Checks if there is any errors
+  const disableSend = errorsList.some((error) => error !== null);
 
   useEffect(() => {
     if (recordToEdit) {
@@ -69,7 +75,7 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
     } else if (floatValue <= 0) {
       setAmountError("Error! You have to provide a positive number.");
     } else {
-      setAmountError("");
+      setAmountError(null);
     }
   };
 
@@ -167,8 +173,11 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
                 )}
               </div>
             </div>
+
+            {/* Send button */}
             <button
-              className="box-border p-2 pl-5 pr-5 text-sm"
+              disabled={disableSend}
+              className={`box-border p-2 pl-5 pr-5 text-sm ${disableSend ? "cursor-not-allowed text-gray-700" : ""}`}
               onClick={prepareData}
             >
               {recordToEdit ? "Save" : "Add"}
