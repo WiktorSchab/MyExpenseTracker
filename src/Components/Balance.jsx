@@ -16,7 +16,8 @@ function Balance({ transactions }) {
   };
 
   useEffect(() => {
-    const dailyBalances = {};
+    // Added first day of month as default value
+    const dailyBalances = { "01": 0 };
 
     // Getting balance of each day
     transactions.forEach(({ date, value, valueType }) => {
