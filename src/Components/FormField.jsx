@@ -4,7 +4,7 @@ function FormField({
   id,
   label,
   placeholder,
-  maxLength,
+  maxLength = 64,
   onChange,
   value,
   validationError,
@@ -44,10 +44,6 @@ FormField.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.string,
   validationError: PropTypes.string,
-};
-
-FormField.defaultProps = {
-  maxLength: 64,
 };
 
 export default FormField;

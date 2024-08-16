@@ -1,6 +1,13 @@
 import PropTypes from "prop-types";
 
-function CheckBox({ id, name, value, onChange, isChecked, labelValue }) {
+function CheckBox({
+  id,
+  name,
+  value,
+  onChange,
+  isChecked = false,
+  labelValue,
+}) {
   return (
     <label className="flex cursor-pointer items-center">
       <input
@@ -27,8 +34,4 @@ CheckBox.propTypes = {
   labelValue: PropTypes.string,
   onChange: PropTypes.func,
   isChecked: PropTypes.bool,
-};
-
-CheckBox.defaultProps = {
-  isChecked: false,
 };

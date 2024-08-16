@@ -1,6 +1,13 @@
 import PropTypes from "prop-types";
 
-function RadioButton({ id, name, value, labelValue, onChange, isChecked }) {
+function RadioButton({
+  id,
+  name,
+  value,
+  labelValue,
+  onChange,
+  isChecked = false,
+}) {
   return (
     <>
       <label className="flex cursor-pointer items-center">
@@ -27,10 +34,6 @@ RadioButton.propTypes = {
   labelValue: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   isChecked: PropTypes.bool,
-};
-
-RadioButton.defaultProps = {
-  onChange: false,
 };
 
 export default RadioButton;

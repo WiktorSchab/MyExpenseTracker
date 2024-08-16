@@ -2,7 +2,13 @@ import PropTypes from "prop-types";
 import { Chart as ChartJs } from "chart.js/auto";
 import { useEffect, useRef } from "react";
 
-function ChartComponent({ chartType, labels, data, informations, styles }) {
+function ChartComponent({
+  chartType,
+  labels,
+  data,
+  informations,
+  styles = {},
+}) {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
 
@@ -124,10 +130,6 @@ ChartComponent.propTypes = {
     margin: PropTypes.string,
     padding: PropTypes.string,
   }),
-};
-
-ChartComponent.defaultProps = {
-  styles: {},
 };
 
 export default ChartComponent;

@@ -6,7 +6,7 @@ function ExpenseItem({
   value,
   description,
   type,
-  category,
+  category = "Uncategorized",
   date,
   onEditFunc,
   onDelFunc,
@@ -48,11 +48,6 @@ ExpenseItem.propTypes = {
   date: PropTypes.string,
   onEditFunc: PropTypes.func,
   onDelFunc: PropTypes.func,
-};
-
-ExpenseItem.defaultProps = {
-  description: "No description provided",
-  category: "Uncategorized",
 };
 
 export default ExpenseItem;
