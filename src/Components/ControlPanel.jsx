@@ -148,6 +148,7 @@ function ControlPanel({
 ControlPanel.propTypes = {
   transactions: PropTypes.arrayOf(transactionShape),
   setFilteredTransactions: PropTypes.func,
+  setSortedTransactions: PropTypes.func,
 };
 
 export default ControlPanel;
