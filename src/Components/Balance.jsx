@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { transactionShape } from "../Lib/types";
 import ChartComponent from "./ChartComponent"; // Import the Chart component
 
-function Balance({ transactions }) {
+function Balance({ transactions, dateOfData }) {
   const [labels, setLabels] = useState([]);
   const [balances, setBalances] = useState([]);
   const [lastDayBalance, setLastDayBalance] = useState(0);
@@ -15,7 +15,19 @@ function Balance({ transactions }) {
     return `Day: ${day}, Balance: ${balance.toFixed(2)}`;
   };
 
+  const getLastDayOfMonth = (year, month) => {
+    return new Date(year, month, 0).getDate();
+  };
+
   useEffect(() => {
+    const monthOfData = dateOfData.getMonth() + 1;
+    const yearOfData = dateOfData.getFullYear();
+
+    const today = new Date();
+    const dayToday = today.getDate();
+    const monthToday = today.getMonth() + 1;
+    const yearToday = today.getFullYear();
+
     // Added first day of month as default value
     const dailyBalances = { "01": 0 };
 
@@ -33,6 +45,18 @@ function Balance({ transactions }) {
 
     // Sorting days
     const sortedDays = Object.keys(dailyBalances).sort((a, b) => a - b);
+    const lastDay = sortedDays[sortedDays.length - 1];
+
+    // Adding bilance of today/last day month if there is not any. That is made for visual aspect of chart
+    if (yearToday > yearOfData || monthToday > monthOfData) {
+      const lastDayOfMonth = getLastDayOfMonth(yearOfData, monthOfData);
+      const lastDayString = lastDayOfMonth.toString();
+      sortedDays.push(lastDayString);
+      dailyBalances[lastDayString] = 0;
+    } else if (dayToday > lastDay) {
+      sortedDays.push(dayToday);
+      dailyBalances[dayToday] = 0;
+    }
 
     // Getting cumulative balance of each day
     const cumulativeBalances = {};
@@ -43,13 +67,12 @@ function Balance({ transactions }) {
     });
 
     // Getting monthly balance
-    const lastDay = sortedDays[sortedDays.length - 1];
     setLastDayBalance(cumulativeBalances[lastDay] || 0);
 
     // Convert cumulativeBalances to arrays for charting
     setLabels(sortedDays);
     setBalances(sortedDays.map((day) => cumulativeBalances[day]));
-  }, [transactions]);
+  }, [transactions, dateOfData]);
 
   return (
     <div className="flex flex-col items-center">
@@ -74,6 +97,7 @@ function Balance({ transactions }) {
 
 Balance.propTypes = {
   transactions: PropTypes.arrayOf(transactionShape).isRequired,
+  dateOfData: PropTypes.instanceOf(Date).isRequired,
 };
 
 export default Balance;
