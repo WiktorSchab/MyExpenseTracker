@@ -17,7 +17,10 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
 
   const [isDateVisible, setIsDateVisible] = useState(false);
 
-  const optionsToShow = isExpense ? expenseCategories : incomeCategories;
+  const optionsToShow = [
+    "Other",
+    ...(isExpense ? expenseCategories : incomeCategories),
+  ];
 
   // Add every Error state variable to this array
   const errorsList = [amountError];
@@ -149,10 +152,6 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                 >
-                  <option value="Other" selected>
-                    Other
-                  </option>
-
                   {optionsToShow.map((value, id) => (
                     <option key={id} value={value}>
                       {value}
