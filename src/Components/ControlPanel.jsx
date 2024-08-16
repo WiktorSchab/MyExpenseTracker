@@ -4,7 +4,11 @@ import PropTypes from "prop-types";
 import sortingUtils from "../Lib/sortingFunctions";
 import { transactionShape } from "../Lib/types";
 
-function ControlPanel({ transactions, setFilteredTransactions }) {
+function ControlPanel({
+  transactions,
+  setFilteredTransactions,
+  setSortedTransactions,
+}) {
   // for sorting, filtering etc
   const [amountSorting, setAmountSorting] = useState("");
   const [isDateSortDesc, setIsDateSortDesc] = useState(true);
@@ -15,6 +19,30 @@ function ControlPanel({ transactions, setFilteredTransactions }) {
   // useEffect for sorting and filtering
   useEffect(() => {
     let sortedTransactions = [...transactions];
+    let anyFiltering = 0;
+
+    // Filtering by min and max value
+    if (minValue || maxValue) {
+      sortedTransactions = sortingUtils.filterByMaxMinValue(
+        sortedTransactions,
+        minValue,
+        maxValue,
+      );
+      anyFiltering = 1;
+    }
+
+    // Filtering by type (expenses/incomes)
+    if (typeRecordFilter) {
+      sortedTransactions = sortingUtils.filterByType(
+        sortedTransactions,
+        typeRecordFilter,
+      );
+      anyFiltering = 1;
+    }
+
+    if (anyFiltering) {
+      setFilteredTransactions(sortedTransactions);
+    }
 
     // Sorting by date
     sortingUtils.sortByDate(sortedTransactions, isDateSortDesc);
@@ -24,24 +52,7 @@ function ControlPanel({ transactions, setFilteredTransactions }) {
       sortingUtils.sortByValue(sortedTransactions, amountSorting === "desc");
     }
 
-    // Filtering by type (expenses/incomes)
-    if (typeRecordFilter) {
-      sortedTransactions = sortingUtils.filterByType(
-        sortedTransactions,
-        typeRecordFilter,
-      );
-    }
-
-    // Filtering by min and max value
-    if (minValue || maxValue) {
-      sortedTransactions = sortingUtils.filterByMaxMinValue(
-        sortedTransactions,
-        minValue,
-        maxValue,
-      );
-    }
-
-    setFilteredTransactions(sortedTransactions);
+    setSortedTransactions(sortedTransactions);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     amountSorting,

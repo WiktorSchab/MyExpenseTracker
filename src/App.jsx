@@ -13,6 +13,8 @@ function App() {
   const [transactions, setTransactions] = useState(initialTransactions);
   const [filteredTransactions, setFilteredTransactions] =
     useState(initialTransactions);
+  const [sortedTransactions, setSortedTransactions] =
+    useState(initialTransactions);
 
   // Filtering data to show only transactions in selected month
   useEffect(() => {
@@ -35,11 +37,12 @@ function App() {
         <ControlPanel
           transactions={transactions}
           setFilteredTransactions={setFilteredTransactions}
+          setSortedTransactions={setSortedTransactions}
         />
 
         <TransactionList
           transactions={transactions}
-          filteredTransactions={filteredTransactions}
+          filteredTransactions={sortedTransactions}
           setTransactions={setTransactions}
         />
       </div>
