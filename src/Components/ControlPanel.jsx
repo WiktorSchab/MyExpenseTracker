@@ -6,11 +6,11 @@ import { transactionShape } from "../Lib/types";
 
 function ControlPanel({ transactions, setFilteredTransactions }) {
   // for sorting, filtering etc
-  const [amountSorting, setAmountSorting] = useState(null);
+  const [amountSorting, setAmountSorting] = useState("");
   const [isDateSortDesc, setIsDateSortDesc] = useState(true);
-  const [typeRecordFilter, setTypeRecordFilter] = useState(null);
-  const [minValue, setMinValue] = useState(null);
-  const [maxValue, setMaxValue] = useState(null);
+  const [typeRecordFilter, setTypeRecordFilter] = useState("");
+  const [minValue, setMinValue] = useState("");
+  const [maxValue, setMaxValue] = useState("");
 
   // useEffect for sorting and filtering
   useEffect(() => {
