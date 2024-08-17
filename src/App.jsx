@@ -10,11 +10,17 @@ import Header from "./Components/Header";
 
 function App() {
   const [date, setDate] = useState(new Date());
+  const [title, setTitle] = useState("MyExpensesTracker");
+
   const [transactions, setTransactions] = useState(initialTransactions);
   const [filteredTransactions, setFilteredTransactions] =
     useState(initialTransactions);
   const [sortedTransactions, setSortedTransactions] =
     useState(initialTransactions);
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
 
   // Filtering data to show only transactions in selected month
   useEffect(() => {
@@ -44,6 +50,7 @@ function App() {
           transactions={transactions}
           filteredTransactions={sortedTransactions}
           setTransactions={setTransactions}
+          setTitle={setTitle}
         />
       </div>
     </div>
