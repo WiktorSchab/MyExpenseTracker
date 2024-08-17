@@ -9,6 +9,7 @@ function TransactionList({
   transactions,
   setTransactions,
   filteredTransactions,
+  setTitle,
 }) {
   const [isFormDisplayed, setIsFormDisplayed] = useState(false);
   const [editRecord, setEditRecord] = useState(null);
@@ -17,12 +18,17 @@ function TransactionList({
   const handleAddClick = () => {
     setIsFormDisplayed(true);
     setEditRecord(null);
+    setTitle("Adding transaction ➕💼");
   };
-  const handleCloseForm = () => setIsFormDisplayed(false);
+  const handleCloseForm = () => {
+    setIsFormDisplayed(false);
+    setTitle("MyExpensesTracker");
+  };
 
   const handleAddRecord = (newRecord) => {
     setTransactions([...transactions, newRecord]);
     setIsFormDisplayed(false);
+    setTitle("Adding transaction ➕💼");
   };
 
   const handleEditRecord = (recordId) => {
@@ -30,16 +36,15 @@ function TransactionList({
     const filteredTransaction = filteredTransactions.filter(
       (_, index) => index === recordId,
     );
-    console.log(filteredTransaction);
 
     // Add the id to the record
     const transaction = {
       ...filteredTransaction,
       id: recordId,
     };
-
     setEditRecord(transaction);
     setIsFormDisplayed(true);
+    setTitle("Editing transaction ✏️💼");
   };
 
   const finalizeEditRecord = (editedRecord, recordId) => {
@@ -110,6 +115,7 @@ TransactionList.propTypes = {
   transactions: PropTypes.arrayOf(transactionShape),
   setTransactions: PropTypes.func,
   filteredTransactions: PropTypes.arrayOf(transactionShape),
+  setTitle: PropTypes.func,
 };
 
 export default TransactionList;
