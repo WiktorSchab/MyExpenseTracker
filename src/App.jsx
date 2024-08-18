@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-import { transactions as initialTransactions } from "./Data/transactions";
+import { transactions as defaultTransactions } from "./Data/transactions";
 
 import TransactionList from "./Components/TransactionList";
 import ControlPanel from "./Components/ControlPanel";
@@ -12,6 +12,11 @@ function App() {
   const [date, setDate] = useState(new Date());
   const [title, setTitle] = useState("MyExpensesTracker");
 
+  // Loading saved data
+  // !! defaultTransactions will be deleted in prod !!
+  const initialTransactions =
+    JSON.parse(localStorage.getItem("transactions")) || defaultTransactions;
+
   const [transactions, setTransactions] = useState(initialTransactions);
   const [filteredTransactions, setFilteredTransactions] =
     useState(initialTransactions);
@@ -21,6 +26,11 @@ function App() {
   useEffect(() => {
     document.title = title;
   }, [title]);
+
+  // Saving transactions data on local storage
+  useEffect(() => {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  }, [transactions]);
 
   // Filtering data to show only transactions in selected month
   useEffect(() => {
