@@ -148,7 +148,7 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
               <div className="flex w-[50%] flex-row items-center gap-5">
                 <select
                   id="select-category"
-                  className="block w-[50%] rounded-lg border bg-gray-50 px-2.5 py-1.5 text-gray-900"
+                  className="select-main w-[50%]"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                 >
@@ -165,7 +165,7 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
                 {isDateVisible && (
                   <input
                     type="date"
-                    className="black-calendar block w-full rounded-xl border bg-gray-50 px-2.5 py-1.5 text-sm text-black"
+                    className="input-date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                   />
@@ -176,7 +176,7 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
             {/* Send button */}
             <button
               disabled={disableSend}
-              className={`box-border p-2 pl-5 pr-5 text-sm ${disableSend ? "cursor-not-allowed text-gray-700" : ""}`}
+              className={`button-submit ${disableSend ? "cursor-not-allowed text-gray-700" : ""}`}
               onClick={prepareData}
             >
               {recordToEdit ? "Save" : "Add"}
