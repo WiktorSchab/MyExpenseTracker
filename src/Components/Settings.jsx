@@ -9,6 +9,12 @@ const GenerateButtonList = ({ children }) => {
 
   return <ul className="w-[45%]">{listItems}</ul>;
 };
+
+const deleteTransaction = () => {
+  localStorage.setItem("transactions", null);
+  window.location.reload();
+};
+
 GenerateButtonList.propTypes = {
   children: PropTypes.node.isRequired,
 };
@@ -19,7 +25,9 @@ function Settings() {
       <h5 className="mb-5">Settings</h5>
       <div className="flex w-[100%] justify-between px-5">
         <GenerateButtonList>
-          <button className="mb-2 w-full">Delete transactions data</button>
+          <button className="mb-2 w-full" onClick={deleteTransaction}>
+            Delete transactions data
+          </button>
           <button className="mb-2 w-full">Download transactions data</button>
           <button className="mb-2 w-full">Upload transactions data</button>
         </GenerateButtonList>
