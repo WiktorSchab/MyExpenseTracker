@@ -21,6 +21,7 @@ GenerateButtonList.propTypes = {
 
 function Settings() {
   const [downloadDataError, setDownloadDataError] = useState(null);
+  const [uploadDataError, setUploadDataError] = useState(null);
 
   const downloadTransaction = () => {
     const transactions = localStorage.getItem("transactions");
@@ -41,6 +42,29 @@ function Settings() {
     link.click();
 
     URL.revokeObjectURL(url);
+  };
+
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (file.type !== "application/json") {
+      setUploadDataError("Please upload a JSON file.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const content = e.target.result;
+        const json = JSON.parse(content);
+        localStorage.setItem("transactions", JSON.stringify(json));
+        window.location.reload();
+      } catch (error) {
+        setUploadDataError("Error reading or parsing the JSON file.");
+      }
+    };
+    reader.readAsText(file);
   };
 
   return (
@@ -64,7 +88,25 @@ function Settings() {
             </button>
           </div>
           <div>
-            <button className="mb-2 w-full">Upload transactions data</button>
+            <div>
+              <input
+                type="file"
+                accept=".json"
+                onChange={handleFileUpload}
+                className="hidden"
+              />
+              <span className="block text-center font-bold text-red-400">
+                {uploadDataError}
+              </span>
+              <button
+                className="mb-2 w-full"
+                onClick={() =>
+                  document.querySelector('input[type="file"]').click()
+                }
+              >
+                Upload transactions data
+              </button>
+            </div>
           </div>
         </GenerateButtonList>
         <GenerateButtonList>
