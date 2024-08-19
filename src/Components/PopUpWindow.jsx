@@ -1,6 +1,20 @@
 import PropTypes from "prop-types";
+import { useEffect } from "react";
 
 function PopUpWindow({ children, closePopUp }) {
+  // Functions that calls `closePopUp` on `Escape` button
+  const escapeToClose = (e) => {
+    if (e.key === "Escape") {
+      closePopUp();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", escapeToClose);
+
+    return () => document.removeEventListener("keydown", escapeToClose);
+  }, []);
+
   return (
     <div className="fixed left-0 top-0 z-10 h-full w-full bg-black/40 backdrop-blur">
       <div className="relative flex h-full w-full items-center justify-center">
