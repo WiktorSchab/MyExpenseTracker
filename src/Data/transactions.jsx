@@ -1,5 +1,6 @@
 export const transactions = [
   {
+    id: 0,
     valueType: "+",
     value: 500.0,
     description: "Salary",
@@ -8,6 +9,7 @@ export const transactions = [
     date: "2024-08-15",
   },
   {
+    id: 1,
     valueType: "-",
     value: 150.0,
     description: "Groceries",
@@ -16,6 +18,7 @@ export const transactions = [
     date: "2024-08-20",
   },
   {
+    id: 2,
     valueType: "-",
     value: 75.0,
     description: "Internet Bill",
@@ -24,6 +27,7 @@ export const transactions = [
     date: "2024-08-05",
   },
   {
+    id: 3,
     valueType: "+",
     value: 200.0,
     description: "Freelance Project",
@@ -32,6 +36,7 @@ export const transactions = [
     date: "2024-08-10",
   },
   {
+    id: 4,
     valueType: "-",
     value: 50.0,
     description: "Movie Night",
@@ -40,6 +45,7 @@ export const transactions = [
     date: "2024-08-15",
   },
   {
+    id: 5,
     valueType: "-",
     value: 250.0,
     description: "Movie Day",
