@@ -58,7 +58,7 @@ function AddRecordForm({
     if (!recordToEdit) {
       onAddRecord({ id: availableId, ...newRecord });
     } else {
-      onEditRecord(newRecord, recordToEdit.id);
+      onEditRecord({ id: recordToEdit[0].id, ...newRecord });
     }
   };
 

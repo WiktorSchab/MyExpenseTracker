@@ -31,9 +31,7 @@ function ExpenseItem({
         </div>
       </div>
       <div className="ml-auto flex gap-2">
-        <button onClick={() => onEditFunc(id)} disabled>
-          Edit
-        </button>
+        <button onClick={() => onEditFunc(id)}>Edit</button>
         <button onClick={() => onDelFunc(id)}>Delete</button>
       </div>
     </li>

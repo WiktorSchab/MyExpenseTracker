@@ -46,7 +46,6 @@ function App() {
 
     setFilteredTransactions(transactionInMonth);
   }, [date, transactions]);
-  console.log(transactions, filteredTransactions, sortedTransactions);
   return (
     <div className="flex items-center justify-center">
       <div className="relative h-[900px] w-[1440px] bg-blue-500 px-5 text-white">

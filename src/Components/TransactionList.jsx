@@ -34,31 +34,24 @@ function TransactionList({
 
   const handleEditRecord = (recordId) => {
     // Get the single record based on the recordId
-    const filteredTransaction = filteredTransactions.filter(
-      (_, index) => index === recordId,
+    const filteredTransaction = transactions.filter(
+      (transactions) => transactions.id === recordId,
     );
 
-    // Add the id to the record
-    const transaction = {
-      ...filteredTransaction,
-      id: recordId,
-    };
-    setEditRecord(transaction);
+    setEditRecord(filteredTransaction);
     setIsFormDisplayed(true);
     setTitle("Editing transaction ✏️💼");
   };
 
-  const finalizeEditRecord = (editedRecord, recordId) => {
-    // Update the transaction at the specified index with the edited record
-    const updatedTransactions = [...transactions];
-    updatedTransactions[recordId] = editedRecord;
-
+  const finalizeEditRecord = (editedRecord) => {
+    const updatedTransactions = transactions.map((transaction) =>
+      transaction.id === editedRecord.id ? editedRecord : transaction,
+    );
     setTransactions(updatedTransactions);
     setIsFormDisplayed(false);
   };
 
   const handleDeleteRecord = (recordId) => {
-    console.log(recordId);
     const updatedTransactions = transactions.filter(
       (transaction) => transaction.id !== recordId,
     );
