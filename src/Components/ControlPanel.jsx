@@ -25,7 +25,7 @@ function ControlPanel({
     sortedTransactions = sortedTransactions.filter(
       (transaction) => transaction.date.slice(0, 7) === yearAndMonth,
     );
-    let anyFiltering = 0;
+    //let anyFiltering = 0;
 
     // Filtering by min and max value
     if (minValue || maxValue) {
@@ -34,7 +34,7 @@ function ControlPanel({
         minValue,
         maxValue,
       );
-      anyFiltering = 1;
+      //anyFiltering = 1;
     }
 
     // Filtering by type (expenses/incomes)
@@ -43,12 +43,12 @@ function ControlPanel({
         sortedTransactions,
         typeRecordFilter,
       );
-      anyFiltering = 1;
+      //anyFiltering = 1;
     }
 
-    if (anyFiltering) {
-      setFilteredTransactions(sortedTransactions);
-    }
+    //if (anyFiltering) {
+    setFilteredTransactions(sortedTransactions);
+    //}
 
     // Sorting by date
     sortingUtils.sortByDate(sortedTransactions, isDateSortDesc);
