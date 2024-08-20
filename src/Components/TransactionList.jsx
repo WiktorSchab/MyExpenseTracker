@@ -112,6 +112,7 @@ TransactionList.propTypes = {
   setTransactions: PropTypes.func,
   filteredTransactions: PropTypes.arrayOf(transactionShape),
   setTitle: PropTypes.func,
+  availableId: PropTypes.number,
 };
 
 export default TransactionList;

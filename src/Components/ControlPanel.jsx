@@ -156,6 +156,7 @@ ControlPanel.propTypes = {
   transactions: PropTypes.arrayOf(transactionShape),
   setFilteredTransactions: PropTypes.func,
   setSortedTransactions: PropTypes.func,
+  date: PropTypes.instanceOf(Date).isRequired,
 };
 
 export default ControlPanel;
