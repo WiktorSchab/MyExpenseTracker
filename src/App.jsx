@@ -9,6 +9,8 @@ import Balance from "./Components/Balance";
 import Header from "./Components/Header";
 
 function App() {
+  //reset
+  //localStorage.setItem("transactions", null);
   const [date, setDate] = useState(new Date());
   const [title, setTitle] = useState("MyExpensesTracker");
 
@@ -22,6 +24,8 @@ function App() {
     useState(initialTransactions);
   const [sortedTransactions, setSortedTransactions] =
     useState(initialTransactions);
+
+  let availableId = transactions[transactions.length - 1].id + 1;
 
   useEffect(() => {
     document.title = title;
@@ -42,18 +46,17 @@ function App() {
 
     setFilteredTransactions(transactionInMonth);
   }, [date, transactions]);
-
+  console.log(transactions, filteredTransactions, sortedTransactions);
   return (
     <div className="flex items-center justify-center">
       <div className="relative h-[900px] w-[1440px] bg-blue-500 px-5 text-white">
         <Header date={date} setDate={setDate} />
-
         <Balance dateOfData={date} transactions={filteredTransactions} />
-
         <ControlPanel
           transactions={transactions}
           setFilteredTransactions={setFilteredTransactions}
           setSortedTransactions={setSortedTransactions}
+          date={date}
         />
 
         <TransactionList
@@ -61,6 +64,7 @@ function App() {
           filteredTransactions={sortedTransactions}
           setTransactions={setTransactions}
           setTitle={setTitle}
+          availableId={availableId}
         />
       </div>
     </div>

@@ -10,6 +10,7 @@ function TransactionList({
   setTransactions,
   filteredTransactions,
   setTitle,
+  availableId,
 }) {
   const [isFormDisplayed, setIsFormDisplayed] = useState(false);
   const [editRecord, setEditRecord] = useState(null);
@@ -57,8 +58,9 @@ function TransactionList({
   };
 
   const handleDeleteRecord = (recordId) => {
-    const updatedTransactions = filteredTransactions.filter(
-      (_, id) => id !== recordId,
+    console.log(recordId);
+    const updatedTransactions = transactions.filter(
+      (transaction) => transaction.id !== recordId,
     );
     setTransactions(updatedTransactions);
   };
@@ -82,7 +84,7 @@ function TransactionList({
           {filteredTransactions.map((transaction, index) => (
             <ExpenseItem
               key={index}
-              id={index}
+              id={transaction.id}
               valueType={transaction.valueType}
               value={transaction.value}
               description={transaction.description}
@@ -103,6 +105,7 @@ function TransactionList({
           onAddRecord={handleAddRecord}
           onEditRecord={finalizeEditRecord}
           recordToEdit={editRecord}
+          availableId={availableId}
         />
       ) : (
         renderAddButton()

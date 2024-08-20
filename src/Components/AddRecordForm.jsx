@@ -6,7 +6,13 @@ import { expenseCategories, incomeCategories } from "../Data/categories";
 import CheckBox from "./CheckBox";
 import { transactionShape } from "../Lib/types";
 
-function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
+function AddRecordForm({
+  onClose,
+  onAddRecord,
+  onEditRecord,
+  recordToEdit,
+  availableId,
+}) {
   const [isExpense, setIsExpense] = useState(true);
   const [amount, setAmount] = useState(0);
   const [description, setDescription] = useState("");
@@ -50,7 +56,7 @@ function AddRecordForm({ onClose, onAddRecord, onEditRecord, recordToEdit }) {
     };
 
     if (!recordToEdit) {
-      onAddRecord(newRecord);
+      onAddRecord({ id: availableId, ...newRecord });
     } else {
       onEditRecord(newRecord, recordToEdit.id);
     }

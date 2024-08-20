@@ -8,6 +8,7 @@ function ControlPanel({
   transactions,
   setFilteredTransactions,
   setSortedTransactions,
+  date,
 }) {
   // for sorting, filtering etc
   const [amountSorting, setAmountSorting] = useState("");
@@ -18,7 +19,12 @@ function ControlPanel({
 
   // useEffect for sorting and filtering
   useEffect(() => {
+    const yearAndMonth = date.toISOString().slice(0, 7);
     let sortedTransactions = [...transactions];
+
+    sortedTransactions = sortedTransactions.filter(
+      (transaction) => transaction.date.slice(0, 7) === yearAndMonth,
+    );
     let anyFiltering = 0;
 
     // Filtering by min and max value
@@ -61,6 +67,7 @@ function ControlPanel({
     minValue,
     maxValue,
     transactions,
+    date,
   ]);
 
   const handleSortDateToggle = () => {
