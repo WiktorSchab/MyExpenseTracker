@@ -1,7 +1,7 @@
 function DownloadMenu() {
   return (
     <>
-      <h5 className="text-lg">Download Expense Report</h5>
+      <h5 className="text-lg">Download Expense Report (not available yet)</h5>
       <div className="mt-3 flex items-center justify-center px-5">
         <div className="flex w-full max-w-md flex-col gap-4">
           <div className="flex justify-between gap-4">
@@ -23,7 +23,9 @@ function DownloadMenu() {
               <option>Income only</option>
             </select>
           </div>
-          <button className="button-submit">Generate</button>
+          <button className="button-submit" disabled>
+            Generate
+          </button>
         </div>
       </div>
     </>

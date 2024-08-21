@@ -110,7 +110,10 @@ function Settings() {
           </div>
         </GenerateButtonList>
         <GenerateButtonList>
-          <button className="w-full">Night mode ON/Day mode ON</button>
+          <p>(not available yet)</p>
+          <button className="w-full" disabled>
+            Night mode ON/Day mode ON
+          </button>
         </GenerateButtonList>
       </div>
     </>
